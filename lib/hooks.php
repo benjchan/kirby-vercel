@@ -2,9 +2,8 @@
 
 $names = option('f-mahler.kirby-vercel.hooks');
 if (is_callable($names)) {
-    $names = $names();
+	$names = $names();
 }
-
 $timestamphooks = [
 	'site.update:after', 'site.changeTitle:after',
 	'page.update:after', 'page.create:after', 'page.delete:after', 'page.changeTitle:after',
@@ -17,7 +16,14 @@ $hooks = [];
 function deploy(string $name)
 {
 	return function ($input) use ($name) {
-        Lib\KirbyVercel\Functions::deploy();
+    Lib\KirbyVercel\Functions::deploy();
+	};
+}
+
+function deployStaging(string $name)
+{
+	return function ($input) use ($name) {
+    Lib\KirbyVercel\Functions::deployStaging();
 	};
 }
 

@@ -9,7 +9,7 @@
     <div
       v-if="button"
       class="k-vercel-button"
-      @click="deploySite"
+      @click="deploySiteStaging"
       :class="{
         loading: isLoading,
         success: isSuccess,
@@ -73,13 +73,13 @@ export default {
         this.newContent = false;
       }
     },
-    deploySite() {
+    deploySiteStaging() {
       this.isSuccess = false;
       this.isError = false;
       this.latest = null;
       this.isLoading = true;
       this.$api
-        .get("vercel")
+        .get("vercelstaging")
         .then(response => {
           var res = JSON.parse(response);
           var job = [];
