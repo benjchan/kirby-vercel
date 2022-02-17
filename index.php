@@ -71,11 +71,11 @@ Kirby::plugin('f-mahler/kirby-vercel', [
           },
         ],
         'computed' => [
-          'siteModified' => function () {
+          'siteModifiedStaging' => function () {
             $cache = kirby()->cache('f-mahler.kirby-vercel');
             $modified = [
-              'timestamp' => $cache->get('timestamp'),
-              'count' => $cache->get('count')
+              'timestampstaging' => $cache->get('timestampstaging'),
+              'countstaging' => $cache->get('countstaging')
             ];
             return $modified;
           }
@@ -101,6 +101,12 @@ Kirby::plugin('f-mahler/kirby-vercel', [
         'pattern' => 'vercel/latest',
         'action'  => function() {
           return Lib\KirbyVercel\Functions::latest();
+        }
+      ],
+      [
+        'pattern' => 'vercel/lateststaging',
+        'action'  => function() {
+          return Lib\KirbyVercel\Functions::lateststaging();
         }
       ],
     ]

@@ -32,9 +32,13 @@ function setTimestamp() {
 		$cache = kirby()->cache('f-mahler.kirby-vercel');
 		$timestamp  = $cache->get('timestamp');
 		$count = $cache->get('count') + 1;
+		$timestampstaging  = $cache->get('timestampstaging');
+		$countstaging = $cache->get('countstaging') + 1;
 		$timestamp = time();
 		$cache->set('timestamp', $timestamp);
 		$cache->set('count', $count);
+		$cache->set('timestampstaging', $timestamp);
+		$cache->set('countstaging', $countstaging);
 	};
 }
 
@@ -45,7 +49,7 @@ if (is_array($names)) {
 }
 
 foreach ($allhooks as $hook) {
-	if(in_array($hook, $names)) {
+	if(is_array($names) && in_array($hook, $names)) {
 		$hooks[$hook] = [deploy($hook), setTimestamp()];
 	} else {
 		$hooks[$hook] = [setTimestamp()];
